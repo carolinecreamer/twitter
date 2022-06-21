@@ -18,7 +18,7 @@ export default function Navbar({ navLinks }) {
 export function NavLinks({ navLinks }) {
   return <ul className="nav-links">
       {navLinks.map((item, idx) => 
-        <NavLink key={idx} navLink = {item}/>
+        <NavLink key={idx} navLink={item}/>
       )}
     </ul>
 }
