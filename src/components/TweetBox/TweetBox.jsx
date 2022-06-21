@@ -19,7 +19,7 @@ export default function TweetBox(props) {
       <div className="tweet-box-footer">
         <TweetBoxIcons />
         <TweetCharacterCount tweetText={props.tweetText} />
-        <TweetSubmitButton tweetText = {props.tweetText} handleOnSubmit={handleOnSubmit}/>
+        <TweetSubmitButton tweetText = {props.tweetText} handleOnSubmit={handleOnSubmit} numChars={props.tweetText.length}/>
       </div>
     </div>
   )
@@ -40,24 +40,19 @@ export function TweetBoxIcons() {
 
 export function TweetCharacterCount(props) {
   // ADD CODE HERE
-  return <span className="tweet-length">{140-props.tweetText.length}</span>
+  if (props.tweetText.length > 0) {
+    return <span className="tweet-length">{140-props.tweetText.length}</span>
+  }
+  else {
+    return <span className="tweet-length"></span>
+  }
 }
 
 export function TweetSubmitButton(props) {
-  if (props.tweetText.length <= 0 || props.tweetText.length > 140) {
-    return (
-      <div className="tweet-submit">
-        <i className="fas fa-plus-circle"></i>
-        <button className="tweet-submit-button">Tweet</button>
-      </div>
-    )
-  }
-  else {
-    return (
-      <div className="tweet-submit">
-        <i className="fas fa-plus-circle"></i>
-        <button onClick={props.handleOnSubmit} className="tweet-submit-button">Tweet</button>
-      </div>
-    )
-    }
+  return (
+    <div className="tweet-submit">
+      <i className="fas fa-plus-circle"></i>
+      <button onClick={props.handleOnSubmit} className="tweet-submit-button" disabled={props.numChars > 140 || props.numChars <= 0? true : false}>Tweet</button>
+    </div>
+  )
 }
